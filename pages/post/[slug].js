@@ -5,7 +5,6 @@ import { getPosts, getPostDetails} from '../../services';
 import { PostDetail, Categories, PostWidget, Author, Comments, CommentsForm} from '../../components'
 
 const PostDetails = ({ post }) => {
-
     console.log(post)
   return (
     <div className="container mx-auto px-10 mb-8">
@@ -29,11 +28,11 @@ const PostDetails = ({ post }) => {
 
 export default PostDetails
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({params}) {
     const data = await getPostDetails(params.slug);
     
     return {
-        props: { posts: data }
+        props: { post: data }
     }
 }
 
@@ -41,7 +40,7 @@ export async function getStaticPaths() {
     const posts = await getPosts();
 
     return {
-        paths: posts.map(({ node: { slug}}) => ({ params: { slug}})),
+        paths: posts.map(({ node: {slug}}) => ({ params: {slug}})),
         fallback: false,
     }
 }
