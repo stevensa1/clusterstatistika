@@ -112,7 +112,18 @@ export const submitComment = async (obj) => {
         },
         body: JSON.stringify(obj)
     })
+    console.log(result);
+    return result.json();
+}
 
+export const publishCommentId = async (id) => {
+    const result = await fetch('/api/publishComment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(id)
+    })
     return result.json();
 }
 
