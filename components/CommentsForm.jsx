@@ -18,7 +18,7 @@ const CommentsForm = ({ slug }) => {
     }, [])
     
 
-    const handleCommentSubmission = () => {
+    const handleCommentSubmission = async () => {
         setError(false);
         const { value: comment } = commentEl.current;
         const { value: name } = nameEl.current;
@@ -38,14 +38,43 @@ const CommentsForm = ({ slug }) => {
             window.localStorage.removeItem('name', name);
             window.localStorage.removeItem('email', email);
         }
-        const id = "null";
-        submitComment(commentObj)
+        let result = await fetch('/api/comments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(commentObj)
+        })
+        console.log(JSON.stringify(commentObj));
+        
+        if(result.statusText == "OK") {
+            setShowSuccessMessage(true)
+            setTimeout(() => {
+                setShowSuccessMessage(false)
+            }, 3000);
+        };
+        let data = await result.json();
+        
+        let id = data.createComment.id;
+        console.log(idComment);
+        let idComment = {id};
+        let idJSON = `{"id":"${idComment}"}`;
+
+        await fetch('/api/publishComment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(idComment)
+        })
+        
+        /*submitComment(commentObj)
             .then((res) => {
                 setShowSuccessMessage(true);
                 setTimeout(() => {
                     setShowSuccessMessage(false)
                 }, 3000);
-            })
+            })*/
     }
 
   return (

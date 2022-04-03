@@ -7,29 +7,29 @@ export const getPosts = async () => {
     const query = gql`
         query MyQuery {
             postsConnection {
-            edges {
-                node {
-                    author {
-                        name
-                        id
-                        photo {
+                edges {
+                    node {
+                        author {
+                            name
+                            id
+                            photo {
+                                url
+                            }
+                            description
+                        }
+                        createdAt
+                        slug
+                        title
+                        excerpt
+                        featuredimage {
                             url
                         }
-                        description
-                    }
-                    createdAt
-                    slug
-                    title
-                    excerpt
-                    featuredimage {
-                        url
-                    }
-                    categories {
-                        name
-                        slug
+                        categories {
+                            name
+                            slug
+                        }
                     }
                 }
-            }
             }
         }
     `;
@@ -112,7 +112,7 @@ export const submitComment = async (obj) => {
         },
         body: JSON.stringify(obj)
     })
-    return result.json();
+    return await result.json();
 }
 
 export const publishCommentId = async (id) => {
