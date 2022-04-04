@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react'
+import Head from 'next/head';
 
 import Link from 'next/link';
 /*
