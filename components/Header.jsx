@@ -15,6 +15,9 @@ const link = [
     }, {
         name: 'Jasa Olah Data',
         url: '#'
+    }, {
+        name: 'Tailwind Testing',
+        url: '/admindashboard'
     }
 ]
 
