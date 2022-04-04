@@ -38,15 +38,7 @@ const CommentsForm = ({ slug }) => {
             window.localStorage.removeItem('name', name);
             window.localStorage.removeItem('email', email);
         }
-        let result = await fetch('/api/comments', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(commentObj)
-        })
-        console.log(JSON.stringify(commentObj));
-        
+        let result = await submitComment(commentObj);
         if(result.statusText == "OK") {
             setShowSuccessMessage(true)
             setTimeout(() => {
@@ -56,17 +48,19 @@ const CommentsForm = ({ slug }) => {
         let data = await result.json();
         
         let id = data.createComment.id;
-        console.log(idComment);
+        console.log(id);
         let idComment = {id};
-        let idJSON = `{"id":"${idComment}"}`;
+        console.log(idComment);
 
-        await fetch('/api/publishComment', {
+        let commentRes = await fetch('/api/publishComment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(idComment)
-        })
+        });
+
+        window.location.reload();
         
         /*submitComment(commentObj)
             .then((res) => {
@@ -118,7 +112,7 @@ const CommentsForm = ({ slug }) => {
                 >
                     Post Comment
             </button>
-            {showSuccessMessage && <span className='text-xl float-right font-semibold mt-3 text-green-500'>Comment submitted for review</span>}
+            {showSuccessMessage && <span className='text-xl float-right font-semibold mt-3 text-green-500'>Comment submitted</span>}
         </div>
     </div>
   )

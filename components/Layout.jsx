@@ -4,7 +4,7 @@ import {Header} from './';
 const Layout = ({children}) => {
     return (
         <>
-            <div className='sticky position relative top-0'>
+            <div className='sticky position top-0'>
                 <Header/>
             </div>
             {children} </>

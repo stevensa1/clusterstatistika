@@ -4,7 +4,7 @@ const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT
 const graphcmsToken = process.env.GRAPHCMS_TOKEN
 
 export default async function publishComment(req, res) {
-    const {input} = req.body;
+    const {id} = req.body;
 
     const graphQLClient = new GraphQLClient(graphqlAPI, {
         headers: {
@@ -12,7 +12,8 @@ export default async function publishComment(req, res) {
         }
     })
 
-    const query = gql `mutation publishComment($input: String!) {publishComment(where: {id: $input}, to: PUBLISHED) {id}}`
+    const query = gql `mutation publishComment($id: ID!) {publishComment(where: {id: $id}, to: PUBLISHED) {id}}`
+    console.log(query);
     try {
         const result = await graphQLClient.request(query, req.body)
         return res.status(200).send(result);

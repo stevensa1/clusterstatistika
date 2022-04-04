@@ -112,7 +112,7 @@ export const submitComment = async (obj) => {
         },
         body: JSON.stringify(obj)
     })
-    return await result.json();
+    return await result;
 }
 
 export const publishCommentId = async (id) => {
@@ -123,13 +123,13 @@ export const publishCommentId = async (id) => {
         },
         body: JSON.stringify(id)
     })
-    return result.json();
+    return await result.json();
 }
 
 export const getComments = async (slug) => {
     const query = gql`
     query getComments($slug: String!) {
-        comments(where: {post: {slug: $slug}}) {
+        comments(where: {post: {slug: $slug}} orderBy: createdAt_DESC) {
             name
             createdAt
             comment
