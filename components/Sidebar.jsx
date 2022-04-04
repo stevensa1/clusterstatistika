@@ -2,7 +2,13 @@ import React, {useContext, useState} from 'react'
 
 import Link from 'next/link';
 /*
-<div className='w-96 space-y-1 h-screen flex flex-col bg-gray-900 rounded-md'>
+
+*/
+
+const Sidebar = () => {
+    const [isOpen, setisOpen] = useState(false);
+    return (
+        <div className='w-96 space-y-1 h-screen flex flex-col bg-gray-900 rounded-md'>
             <Head>
                 <title>Admin Page</title>
                 <link rel="icon" href="/favicon.ico"/>
@@ -45,12 +51,7 @@ import Link from 'next/link';
                 </ul>
             </div>
         </div>
-*/
-
-const Sidebar = () => {
-    const [isOpen, setisOpen] = useState(false);
-    return (
-        <>
+    /*<>
         {!isOpen ?
             (
                 <button>
@@ -78,7 +79,7 @@ const Sidebar = () => {
         <div className={`top-0 left-0 fixed w-[25vw] h-screen bg-gray-900 p-10 text-2xl text-gray-400 ${isOpen ? 'translate-x-0': '-translate-x-full'} ease-in-out duration-300 transition`}>
                 Sidebar
             </div>
-        </>
+        </>*/
     )
 }
 
